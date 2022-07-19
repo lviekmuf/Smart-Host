@@ -15,11 +15,11 @@ const splitGuestsByPrice = (guests: Array<number>, price: number) => ({
     lowerPaidGuests: guests.filter(guest => guest < price)
 })
 
-const getUsagePremiumRooms = ({ premium, economy, higherPaidGuestsCount, lowerPaidGuestsCount }:any) => {
+const getUsagePremiumRooms = ({ premium, economy, higherPaidGuestsCount, lowerPaidGuestsCount, guests }:any) => {
     const premiumCount = Math.min(higherPaidGuestsCount, premium)
-    const isFreeEconomyRooms = economy > lowerPaidGuestsCount.length
+    const isFreeEconomyRooms = economy >= lowerPaidGuestsCount
     const freePremiumRooms = premium > premiumCount && !isFreeEconomyRooms ? premium - premiumCount : 0
-    return premiumCount + freePremiumRooms
+    return Math.max((premiumCount + freePremiumRooms), (guests - economy))
 }
 
 export const useRoomsSelector = () => {
@@ -33,7 +33,8 @@ export const useRoomsSelector = () => {
             premium,
             economy,
             higherPaidGuestsCount: higherPaidGuests.length,
-            lowerPaidGuestsCount: lowerPaidGuests.length
+            lowerPaidGuestsCount: lowerPaidGuests.length,
+            guests: guests.length
         }
     )
     const usageEconomyCount = Math.min(lowerPaidGuests.length, economy)    
