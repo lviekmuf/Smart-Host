@@ -15,6 +15,7 @@ export interface RoomsInterface {
         premium: number;
         economy: number;
     };
+    minPremiumPrice: number;
     guests: number[];
 }
 
