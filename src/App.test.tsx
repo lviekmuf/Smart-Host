@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 import { getRoomsInfo } from './context/roomsSelector';
 import guests from "./data/guests.json"
+
 const MIN_PREMIUM_PRICE = 100
 
 const setup = async () => {

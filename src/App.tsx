@@ -15,7 +15,6 @@ const App = () => {
             <RoomsInfo />
             <PriceInfo />
           </div>
-
         </div>
       </div>
     </RoomProvider >
