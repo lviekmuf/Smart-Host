@@ -1,8 +1,8 @@
 import { ChangeEvent, useContext, useState, Dispatch, SetStateAction } from "react"
 import { Types } from "../context/reducers";
 import { RoomContext } from "../context/RoomsContext";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 const RoomsInfo = () => {
     const { dispatch, state } = useContext(RoomContext);
