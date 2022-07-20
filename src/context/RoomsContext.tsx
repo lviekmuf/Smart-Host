@@ -1,6 +1,7 @@
 import { createContext, useReducer, Dispatch } from "react";
 import { roomReducer, RoomsActions, RoomsInterface } from "./reducers";
 import guests from "../data/guests.json"
+
 const initialState: RoomsInterface = {
     usageRooms: {
         premium: 0,
@@ -9,6 +10,7 @@ const initialState: RoomsInterface = {
     minPremiumPrice: 100,
     guests
 }
+
 export interface ContextInterface { state: RoomsInterface; dispatch: Dispatch<RoomsActions>; }
 
 export const RoomContext = createContext<ContextInterface>({
