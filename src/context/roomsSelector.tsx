@@ -12,7 +12,8 @@ const getMaxElements = (arr: Array<number>, length: number) => {
 
 const splitGuestsByPrice = (guests: Array<number>, price: number) => guests.filter(guest => guest < price)
 
-export const getRoomsInfo = ({ guests,
+export const getRoomsInfo = ({ 
+    guests,
     minPremiumPrice,
     premium,
     economy

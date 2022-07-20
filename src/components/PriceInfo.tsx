@@ -1,7 +1,7 @@
 import { useRoomsSelector } from "../context/roomsSelector";
 
 const PriceInfo = () => {
-    const {premium, economy} = useRoomsSelector()
+    const { premium, economy } = useRoomsSelector()
 
     return <div className="flex-col">
         <div className="flex-col">
