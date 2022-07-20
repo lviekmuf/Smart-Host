@@ -19,7 +19,7 @@ const getUsagePremiumRooms = ({ premium, economy, higherPaidGuestsCount, lowerPa
     const premiumCount = Math.min(higherPaidGuestsCount, premium)
     const isFreeEconomyRooms = economy >= lowerPaidGuestsCount
     const freePremiumRooms = premium > premiumCount && !isFreeEconomyRooms ? premium - premiumCount : 0
-    return Math.max((premiumCount + freePremiumRooms), (guests - economy))
+    return premiumCount + freePremiumRooms
 }
 
 export const useRoomsSelector = () => {
