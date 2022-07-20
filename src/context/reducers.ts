@@ -27,6 +27,7 @@ type RoomsPayload = {
       rooms: number;
     }
   }
+
 export type RoomsActions = ActionMap<RoomsPayload>[keyof ActionMap<RoomsPayload>];
 
 export const roomReducer = (state: RoomsInterface, action: RoomsActions) => {

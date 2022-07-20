@@ -26,26 +26,30 @@ const RoomsInfo = () => {
 
     return <div className="flex-col">
         <div className="flex-col">
-            <div className="flex gap-x-0.5 mb-2">
-                <div className="pr-4">Free Premium rooms: { }</div>
+            <div className="flex gap-x-0.5 mb-2 justify-between">
+                <div className="pr-4">Free Premium rooms: </div>
                 <input
-                    type="number"
-                    className="input input-xs w-16"
+                    data-testid="premium-rooms"
+                    type="text" 
+                    pattern="[0-9]*"
+                    className="input input-sm w-16 h-6"
                     value={premiumRooms}
                     onChange={handleRoomsChange(setPremiumRooms)}
                 />
             </div>
-            <div className="flex gap-x-0.5  mb-2">
-                <div className="pr-4">Free Economy rooms:</div>
+            <div className="flex gap-x-0.5  mb-3 justify-between">
+                <div className="pr-4">Free Economy rooms: </div>
                 <input
-                    type="number"
-                    className="input input-xs w-16"
+                    data-testid="economy-rooms"
+                    type="text" 
+                    pattern="[0-9]*"
+                    className="input input-sm w-16 h-6"
                     value={economyRooms}
                     onChange={handleRoomsChange(setEconomyRooms)}
                 />
             </div>
             <div className="flex gap-x-0.5 mb-2">
-                <button className="btn btn-outline btn-sm w-full" onClick={handleSubmit}>Submit</button>
+                <button className="btn btn-outline btn-sm w-full" data-testid="submit" onClick={handleSubmit}>Submit</button>
             </div>
         </div>
     </div>
