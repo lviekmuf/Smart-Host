@@ -1,6 +1,6 @@
 import './App.css';
-import PriceInfo from './components/PriceInfo';
-import RoomsInfo from './components/RoomsInfo';
+import PriceInfo from './containers/PriceInfo';
+import RoomsInfo from './containers/RoomsInfo';
 import RoomProvider from './context/RoomsContext';
 
 const App = () => {

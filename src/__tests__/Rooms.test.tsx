@@ -1,4 +1,4 @@
-import { getRoomsInfo } from '../context/roomsSelector';
+import { getRoomsInfo } from '../services/roomsService';
 import guests from "../data/guests.json"
 
 const MIN_PREMIUM_PRICE = 100
