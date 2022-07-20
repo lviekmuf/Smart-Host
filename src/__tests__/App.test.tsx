@@ -17,8 +17,12 @@ const setup = async () => {
     ...utils,
   }
 }
+interface rooms {
+  rooms: string;
+  cost: string;
+}
 
-const getRoomsInfoFromLabel = (label: string | null) => {
+const getRoomsInfoFromLabel = (label: string | null): rooms => {
   if (!label) return {
     rooms: "",
     cost: ""
@@ -30,16 +34,24 @@ const getRoomsInfoFromLabel = (label: string | null) => {
   }
 }
 
-test('UI Test case 1 (Premium: 3, Economy: foo)', async () => {
+const setRooms = async (freePremium: string, freeEconomy: string) => {
   const { premiumInput, economyInput, economyLabel, submitButton, premiumLabel } = await setup()
-  fireEvent.change(premiumInput, { target: { value: '3' } })
-  fireEvent.change(economyInput, { target: { value: 'foo' } })
+
+  fireEvent.change(premiumInput, { target: { value: freePremium } })
+  fireEvent.change(economyInput, { target: { value: freeEconomy } })
   fireEvent.click(submitButton)
+
   const economyContent = economyLabel?.textContent
   const premiumContent = premiumLabel?.textContent
-  const economy = getRoomsInfoFromLabel(economyContent)
-  const premium = getRoomsInfoFromLabel(premiumContent)
+  return {
+    economy: getRoomsInfoFromLabel(economyContent),
+    premium: getRoomsInfoFromLabel(premiumContent)
+  }
+}
 
+test('UI Test case 1 (Premium: 3, Economy: foo)', async () => {
+  const { premium, economy } = await setRooms("3", "foo")
+  
   expect(premium.rooms).toBe("3");
   expect(economy.rooms).toBe("0");
   expect(premium.cost).toBe("738");
@@ -47,29 +59,17 @@ test('UI Test case 1 (Premium: 3, Economy: foo)', async () => {
 });
 
 test('UI Test case 2 (Economy: 3)', async () => {
-  const { economyInput, economyLabel, submitButton, premiumLabel } = await setup()
-  fireEvent.change(economyInput, { target: { value: '3' } })
-  fireEvent.click(submitButton)
-  const economyContent = economyLabel?.textContent
-  const premiumContent = premiumLabel?.textContent
-  const economy = getRoomsInfoFromLabel(economyContent)
-  const premium = getRoomsInfoFromLabel(premiumContent)
+  const { premium, economy } = await setRooms("", "3")
 
   expect(premium.rooms).toBe("0");
   expect(economy.rooms).toBe("3");
   expect(premium.cost).toBe("0");
   expect(economy.cost).toBe("167");
+
 });
 
-test('UI Test case 3 (3, 3)', async () => {
-  const { premiumInput, economyInput, economyLabel, submitButton, premiumLabel } = await setup()
-  fireEvent.change(premiumInput, { target: { value: '3' } })
-  fireEvent.change(economyInput, { target: { value: '3' } })
-  fireEvent.click(submitButton)
-  const economyContent = economyLabel?.textContent
-  const premiumContent = premiumLabel?.textContent
-  const economy = getRoomsInfoFromLabel(economyContent)
-  const premium = getRoomsInfoFromLabel(premiumContent)
+test('UI Test case 3 (Premium: 3, Economy: 3)', async () => {
+  const { premium, economy } = await setRooms("3", "3")
 
   expect(premium.rooms).toBe("3");
   expect(economy.rooms).toBe("3");
@@ -77,15 +77,8 @@ test('UI Test case 3 (3, 3)', async () => {
   expect(economy.cost).toBe("167");
 });
 
-test('UI test case 4 (7, 5)', async () => {
-  const { premiumInput, economyInput, economyLabel, submitButton, premiumLabel } = await setup()
-  fireEvent.change(premiumInput, { target: { value: '7' } })
-  fireEvent.change(economyInput, { target: { value: '5' } })
-  fireEvent.click(submitButton)
-  const economyContent = economyLabel?.textContent
-  const premiumContent = premiumLabel?.textContent
-  const economy = getRoomsInfoFromLabel(economyContent)
-  const premium = getRoomsInfoFromLabel(premiumContent)
+test('UI test case 4 (Premium: 7, Economy: 5)', async () => {
+  const { premium, economy } = await setRooms("7", "5")
 
   expect(premium.rooms).toBe("6");
   expect(economy.rooms).toBe("4");
