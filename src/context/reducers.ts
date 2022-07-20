@@ -6,8 +6,6 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum Types {
-    setPremium = 'SET_PREMIUM',
-    setEconomy = 'SET_ECONOMY',
     setRooms = 'SET_ROOMS',
 }
 
