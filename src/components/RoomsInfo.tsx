@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState, Dispatch, SetStateAction } from "react"
+import { ChangeEvent, useContext, useState, Dispatch, SetStateAction, useEffect } from "react"
 import { Types } from "../context/reducers";
 import { RoomContext } from "../context/RoomsContext";
 
@@ -32,8 +32,9 @@ const RoomsInfo = () => {
                     data-testid="premium-rooms"
                     type="text" 
                     pattern="[0-9]*"
-                    className="input input-sm w-16 h-6"
+                    className="input input-sm w-16 h-6 input-bordered"
                     value={premiumRooms}
+                    autoFocus
                     onChange={handleRoomsChange(setPremiumRooms)}
                 />
             </div>
@@ -43,7 +44,7 @@ const RoomsInfo = () => {
                     data-testid="economy-rooms"
                     type="text" 
                     pattern="[0-9]*"
-                    className="input input-sm w-16 h-6"
+                    className="input input-sm w-16 h-6 input-bordered"
                     value={economyRooms}
                     onChange={handleRoomsChange(setEconomyRooms)}
                 />
