@@ -6,8 +6,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum Types {
-    setPremium = 'SET_PREMIUM',
-    setEconomy = 'SET_ECONOMY',
+    setRooms = 'SET_ROOMS',
 }
 
 export interface RoomsInterface {
@@ -20,26 +19,22 @@ export interface RoomsInterface {
 }
 
 type RoomsPayload = {
-    [Types.setPremium] : {
-      rooms: number
-    };
-    [Types.setEconomy]: {
-      rooms: number;
+    [Types.setRooms]: {
+        premium: number;
+        economy: number;
     }
-  }
+}
 
 export type RoomsActions = ActionMap<RoomsPayload>[keyof ActionMap<RoomsPayload>];
 
 export const roomReducer = (state: RoomsInterface, action: RoomsActions) => {
     switch (action.type) {
-        case Types.setPremium: {
-            return { ...state, usageRooms: { ...state.usageRooms, premium: action.payload.rooms } }
-        }
-        case Types.setEconomy: {
-            return { ...state, usageRooms: { ...state.usageRooms, economy: action.payload.rooms } }
+        case Types.setRooms: {
+            return { ...state, usageRooms: action.payload }
         }
         default: {
             return state
         }
     }
 }
+
